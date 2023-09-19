@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E46010F1-418F-3B11-9A3E-EA4212123654}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>QuantExt-x64-mt</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantExt-x64-mt.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuantExt-x64-mt-gd</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantExt-x64-mt.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuantExt-x64-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">QuantExt-x64-mt.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">QuantExt-x64-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">QuantExt-x64-mt.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">QuantExt-x64-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0\include;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4834</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalDirectoriesEnv>BOOST</ExternalDirectoriesEnv>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatSpecificWarningsAsErrors>5038;4189;4700;5233;4508;26815</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4834</DisableSpecificWarnings>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalDirectoriesEnv>BOOST</ExternalDirectoriesEnv>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <TreatSpecificWarningsAsErrors>5038;4189;4700;5233;4508;26815</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4834</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalDirectoriesEnv>BOOST</ExternalDirectoriesEnv>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatSpecificWarningsAsErrors>5038;4189;4700;5233;4508;26815</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4834</DisableSpecificWarnings>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalDirectoriesEnv>BOOST</ExternalDirectoriesEnv>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <TreatSpecificWarningsAsErrors>5038;4189;4700;5233;4508;26815</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SCL_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;BOOST_ENABLE_ASSERT_HANDLER;BOOST_PHOENIX_STL_TUPLE_H_;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\fhoefer\source\repos\ore\QuantLib;C:\Users\fhoefer\source\repos\ore\QuantExt\QuantLib;C:\local\boost_1_80_0;C:\Users\fhoefer\source\repos\ore\ORETest;C:\Users\fhoefer\source\repos\ore\QuantExt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/fhoefer/source/repos/ore -BC:/Users/fhoefer/source/repos/ore --check-stamp-file C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/fhoefer/source/repos/ore -BC:/Users/fhoefer/source/repos/ore --check-stamp-file C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/fhoefer/source/repos/ore -BC:/Users/fhoefer/source/repos/ore --check-stamp-file C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/fhoefer/source/repos/ore -BC:/Users/fhoefer/source/repos/ore --check-stamp-file C:/Users/fhoefer/source/repos/ore/QuantExt/qle/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\fhoefer\source\repos\ore\QuantExt\qle\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\amendedcalendar.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\austria.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\belgium.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\cme.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\colombia.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\cyprus.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\france.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\greece.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\ice.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\ireland.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\islamicweekendsonly.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\israel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\largejointcalendar.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\luxembourg.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\malaysia.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\mauritius.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\netherlands.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\peru.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\philippines.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\russia.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\spain.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\switzerland.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\unitedarabemirates.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\calendars\wmr.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\averageonindexedcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\averageonindexedcouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\blackovernightindexedcouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\bondtrscashflow.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\brlcdicouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\cashflows.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\cashflowtable.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\cmbcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\commoditycashflow.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\commodityindexedaveragecashflow.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\commodityindexedcashflow.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\couponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\cpicoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\cpicouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\durationadjustedcmscoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\durationadjustedcmscoupontsrpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\equitycoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\equitycouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\equitymargincoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\equitymargincouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\fixedratefxlinkednotionalcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\floatingannuitycoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\floatingannuitynominal.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\fxlinkedcashflow.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\indexedcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\jyyoyinflationcouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\lognormalcmsspreadpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\nonstandardcapflooredyoyinflationcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\nonstandardinflationcouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\nonstandardyoyinflationcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\overnightindexedcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\quantocouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\strippedcapflooredcpicoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\strippedcapflooredyoyinflationcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\subperiodscoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\subperiodscouponpricer.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\yoyinflationcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\cashflows\zerofixedcoupon.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\africa.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\america.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\asia.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\configurablecurrency.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\europe.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\currencies\metals.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\bondindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\commoditybasisfutureindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\commodityindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\compoequityindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\compositeindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\dividendmanager.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\equityindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\fallbackiborindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\fallbackovernightindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\fxindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\genericiborindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\ameribor.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\boebaserate.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\brlcdi.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\ester.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\primeindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\sofr.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\ibor\sonia.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\inflationindexwrapper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\offpeakpowerindex.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\indexes\region.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\ascot.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\averageois.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\bondbasket.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\bondoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\bondrepo.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\bondtotalreturnswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\brlcdiswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\cashflowresults.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\cashsettledeuropeanoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\cbo.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\cdsoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\cliquetoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\commodityapo.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\commodityforward.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\commodityspreadoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\convertiblebond.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\convertiblebond2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\creditlinkedswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\crossccybasismtmresetswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\crossccybasisswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\crossccyfixfloatmtmresetswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\crossccyfixfloatswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\crossccyswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\currencyswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\deposit.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\equityforward.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\fixedbmaswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\forwardbond.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\forwardrateagreement.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\fxforward.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\genericswaption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\impliedbondspread.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\indexcdsoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\indexcreditdefaultswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\makeaverageois.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\makecds.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\makeoiscapfloor.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\multiccycompositeinstrument.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\multilegoption.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\oibasisswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\oiccbasisswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\payment.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\rebatedexercise.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\riskparticipationagreement.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\riskparticipationagreement_tlock.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\subperiodsswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\syntheticcdo.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\tenorbasisswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\instruments\varianceswap.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\blockmatrixinverse.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\bucketeddistribution.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\computeenvironment.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\deltagammavar.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\differentialevolution_mt.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\discretedistribution.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\fillemptymatrix.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\matrixfunctions.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\openclenvironment.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\randomvariable.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\math\randomvariable_io.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\brownianbridgepathinterpolator.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\fdmdefaultableequityjumpdiffusionfokkerplanckop.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\fdmdefaultableequityjumpdiffusionop.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\interpolatedvariatemultipathgenerator.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\multipathgeneratorbase.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\multipathvariategenerator.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\projectedbufferedmultipathgenerator.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\methods\projectedvariatemultipathgenerator.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\annuitymapping.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\basket.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\carrmadanarbitragecheck.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\cdsoptionhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\cirppimplieddefaulttermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\cmscaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\commodityschwartzmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\commodityschwartzparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\cpicapfloorhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\crcirpp.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\crossassetanalytics.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\crossassetmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\crossassetmodelimpliedeqvoltermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\crossassetmodelimpliedfxvoltermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\defaultableequityjumpdiffusionmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\dkimpliedyoyinflationtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\dkimpliedzeroinflationtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\eqbsconstantparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\eqbsparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\eqbspiecewiseconstantparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\exactbachelierimpliedvolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\futureoptionhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\fxbsconstantparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\fxbsparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\fxbspiecewiseconstantparametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\fxeqoptionhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\gaussian1dcrossassetadaptor.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\gaussianlhplossmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\hullwhitebucketing.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\hwmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\infjyparameterization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\jyimpliedyoyinflationtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\jyimpliedzeroinflationtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgm.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgmcalibrationinfo.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgmconvolutionsolver2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgmimplieddefaulttermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgmimpliedyieldtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\lgmvectorised.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\linearannuitymapping.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\linkablecalibratedmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\modelimpliedpricetermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\modelimpliedyieldtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\normalsabr.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\normalsabrsmilesection.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\parametrization.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\piecewiseconstanthelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\projectedcrossassetmodel.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\transitionmatrix.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\yoycapfloorhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\yoyinflationmodeltermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\yoyswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\models\zeroinflationmodeltermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\accrualbondrepoengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticbarrierengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticcashsettledeuropeanengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticcclgmfxoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticdigitalamericanengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticdkcpicapfloorengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticdoublebarrierbinaryengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticdoublebarrierengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticeuropeanengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticeuropeanforwardengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticjycpicapfloorengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticjyyoycapfloorengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticlgmcdsoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticlgmswaptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\analyticxassetlgmeqoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\baroneadesiwhaleyengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\binomialconvertibleengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\blackbondoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\blackcdsoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\blackindexcdsoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\cboengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\cbomcengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\commodityapoengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\commodityschwartzfutureoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\commodityspreadoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\commodityswaptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\cpibacheliercapfloorengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\cpiblackcapfloorengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\cpicapfloorengines.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\crossccyswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\depositengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingbondrepoengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingbondtrsengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingcommodityforwardengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingcreditlinkedswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingcurrencyswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingequityforwardengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingforwardbondengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingfxforwardengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingriskybondengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingriskybondenginemultistate.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discountingswapenginemulticurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\discretizedconvertible.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\fdconvertiblebondevents.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\fddefaultableequityjumpdiffusionconvertiblebondengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\indexcdsoptionbaseengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\indexcdstrancheengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\inflationcapfloorengines.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\intrinsicascotengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\lgmconvolutionsolver.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mccamcurrencyswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mccamfxforwardengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mccamfxoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mclgmfraengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mclgmswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mclgmswaptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mcmultilegbaseengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\mcmultilegoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\midpointcdoengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\midpointcdsenginemultistate.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\midpointindexcdsengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\numericalintegrationindexcdsoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\numericlgmmultilegoptionengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\oiccbasisswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\paymentdiscountingengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\varianceswapgeneralreplicationengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\pricingengines\volatilityfromvarianceswapengine.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\processes\commodityschwartzstateprocess.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\processes\crcirppstateprocess.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\processes\crossassetstateprocess.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\processes\irhwstateprocess.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\processes\irlgm1fstateprocess.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\quotes\logquote.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\aposurface.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\averagefuturepricehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\averageoffpeakpowerhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\averageoisratehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\averagespotpricehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\basistwoswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackdeltautilities.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvariancecurve3.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvariancesurfacemoneyness.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvariancesurfacesparse.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvariancesurfacestddevs.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolconstantspread.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolsurfaceabsolute.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolsurfacebfrr.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolsurfacedelta.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolsurfaceproxy.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\blackvolsurfacewithatm.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\brlcdiratehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\capfloorhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\capfloortermvolsurface.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\correlationtermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\credit\basecorrelationstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\credit\spreadedbasecorrelationcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\creditcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\creditvolcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\crossccybasismtmresetswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\crossccybasisswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\crossccyfixfloatmtmresetswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\crossccyfixfloatswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\crosscurrencypricetermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\datedstrippedoptionlet.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\datedstrippedoptionletadapter.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\discountratiomodifiedcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\dynamiccpivolatilitystructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\dynamicoptionletvolatilitystructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\dynamicswaptionvolmatrix.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\dynamicyoyoptionletvolatilitystructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\eqcommoptionsurfacestripper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\equityforwardcurvestripper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\flatcorrelation.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\futurepricehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\fxblackvolsurface.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\fxvannavolgasmilesection.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\generatordefaulttermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\hazardspreadeddefaulttermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\iborfallbackcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\immfraratehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\inflation\constantcpivolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\inflation\cpivolatilitystructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\oibasisswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\oiccbasisswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\oiscapfloorhelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\oisratehelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\optionletstripper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\optionletstripper1.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\optionletstripper2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\overnightfallbackcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\pricetermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\pricetermstructureadapter.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\proxyoptionletvolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\proxyswaptionvolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedblackvolatilitycurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedblackvolatilitysurfacemoneyness.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedcorrelationcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedcpivolatilitysurface.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadeddiscountcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedinflationcurve.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedoptionletvolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedoptionletvolatility2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedpricetermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedsmilesection.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedsmilesection2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedsurvivalprobabilitytermstructure.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedswaptionvolatility.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\spreadedyoyvolsurface.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\strippedoptionletadapter2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\strippedyoyinflationoptionletvol.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\subperiodsswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\swaptionvolatilityconverter.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\swaptionvolconstantspread.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\swaptionvolcube2.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\tenorbasisswaphelper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\termstructures\yoyinflationoptionletvolstripper.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\time\dateutilities.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\time\yearcounter.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\utilities\commodity.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\utilities\inflation.cpp" />
+    <ClCompile Include="C:\Users\fhoefer\source\repos\ore\QuantExt\qle\utilities\time.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\fhoefer\source\repos\ore\ZERO_CHECK.vcxproj">
+      <Project>{713E3E7C-70D8-3497-B833-FA9DF7AEEA4A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\fhoefer\source\repos\ore\QuantLib\ql\ql_library.vcxproj">
+      <Project>{C68FA03D-7ACD-32DE-86F3-BE08C2B0AD5F}</Project>
+      <Name>ql_library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
