@@ -63,12 +63,14 @@ typedef SimmConfiguration::SimmSide SimmSide;
 
 SimmCalculator::SimmCalculator(const SimmNetSensitivities& simmNetSensitivities,
                                const boost::shared_ptr<SimmConfiguration>& simmConfiguration,
-                               const string& calculationCcy, const string& resultCcy, const boost::shared_ptr<Market> market,
-                               const bool determineWinningRegulations,
-                               const bool enforceIMRegulations, const bool quiet)
+                               const string& calculationCcy, const string& resultCcy,
+                               const boost::shared_ptr<Market> market, const bool determineWinningRegulations,
+                               const bool enforceIMRegulations, const bool quiet,
+                               const map<SimmSide, set<NettingSetDetails>>& hasSEC,
+                               const map<SimmSide, set<NettingSetDetails>>& hasCFTC)
     : simmNetSensitivities_(simmNetSensitivities), simmConfiguration_(simmConfiguration),
       calculationCcy_(calculationCcy), resultCcy_(resultCcy.empty() ? calculationCcy_ : resultCcy), market_(market),
-      quiet_(quiet) {
+      quiet_(quiet), hasSEC_(hasSEC), hasCFTC_(hasCFTC) {
 
     QL_REQUIRE(checkCurrency(calculationCcy_),
                "SIMM Calculator: The calculation currency (" << calculationCcy_ << ") must be a valid ISO currency code");
@@ -81,7 +83,7 @@ SimmCalculator::SimmCalculator(const SimmNetSensitivities& simmNetSensitivities,
         const bool isSchedule = cr.imModel == "Schedule";
         if (isSchedule) {
             if (!quiet_ && determineWinningRegulations) {
-                WLOG(ore::data::StructuredTradeWarningMessage(cr.tradeId, cr.tradeType, "SIMM calculator", "Skipping over Schedule CRIF record"));
+                ore::data::StructuredTradeWarningMessage(cr.tradeId, cr.tradeType, "SIMM calculator", "Skipping over Schedule CRIF record").log();
             } 
             continue;
         }
@@ -98,7 +100,17 @@ SimmCalculator::SimmCalculator(const SimmNetSensitivities& simmNetSensitivities,
             postRegsIsEmpty_.at(cr.nettingSetDetails) = false;
         }
 
-        tmp.insert(cr);
+        // Make sure we have CRIF amount denominated in the result ccy
+        CrifRecord newCrifRecord = cr;
+        if (resultCcy_ == "USD" && cr.hasAmountUsd()) {
+            newCrifRecord.amountResultCcy = newCrifRecord.amountUsd;
+        } else {
+            const Real fxSpot = market_->fxRate(newCrifRecord.amountCurrency + resultCcy_)->value();
+            newCrifRecord.amountResultCcy = fxSpot * newCrifRecord.amount;
+        }
+        newCrifRecord.resultCurrency = resultCcy_;
+
+        tmp.insert(newCrifRecord);
     }
 
     // If there are no CRIF records to process
@@ -116,31 +128,50 @@ SimmCalculator::SimmCalculator(const SimmNetSensitivities& simmNetSensitivities,
 
     // Some additional processing depending on the regulations applicable to each netting set
     for (auto& sv : regSensitivities_) {
+        const SimmSide& side = sv.first;
 
         for (auto& s : sv.second) {
+            const NettingSetDetails& nettingDetails = s.first;
+
             // Where there is SEC and CFTC in the portfolio, we add the CFTC trades to SEC,
             // but still continue with CFTC calculations
-            const bool hasCFTC = s.second.find("CFTC") != s.second.end();
-            const bool hasSEC = s.second.find("SEC") != s.second.end();
-            if (hasCFTC && hasSEC) {
-                const SimmNetSensitivities& netRecordsCFTC = s.second.at("CFTC")->netRecords(true);
-                const SimmNetSensitivities& netRecordsSEC = s.second.at("SEC")->netRecords(true);
-                for (const auto& cr : netRecordsCFTC) {
-                    // Only add CFTC records to SEC if the record was not already in SEC,
-                    // i.e. we skip over CRIF records with regulations specified as e.g. "..., CFTC, SEC, ..."
-                    if (netRecordsSEC.find(cr) == netRecordsSEC.end()) {
-                        if (!quiet_) {
-                            DLOG("SimmCalculator: Inserting CRIF record with CFTC "
-                                << s.first << " regulation into SEC CRIF records: " << cr);
-                        }
-                        s.second.at("SEC")->add(cr);
+            const bool hasCFTCGlobal = hasCFTC_[side].find(nettingDetails) != hasCFTC_[side].end();
+            const bool hasSECGlobal = hasSEC_[side].find(nettingDetails) != hasSEC_[side].end();
+            const bool hasSECLocal = s.second.find("SEC") != s.second.end();
+            const bool hasCFTCLocal = s.second.find("CFTC") != s.second.end();
+
+            if ((hasSECLocal && hasCFTCLocal) || (hasCFTCGlobal && hasSECGlobal)) {
+                if (!hasSECLocal) {
+                    if (!hasCFTCLocal) {
+                        continue;
+                    } else {
+                        s.second["SEC"] = boost::make_shared<CrifLoader>(simmConfiguration_,
+                                                                         CrifRecord::additionalHeaders, true, false);
                     }
                 }
+                
+                if (hasCFTCLocal) {
+                    // At this point, we expect to have both SEC and CFTC sensitivities for the netting set
+                    const SimmNetSensitivities& netRecordsCFTC = s.second.at("CFTC")->netRecords(true);
+                    const SimmNetSensitivities& netRecordsSEC = s.second.at("SEC")->netRecords(true);
+                    for (const auto& cr : netRecordsCFTC) {
+                        // Only add CFTC records to SEC if the record was not already in SEC,
+                        // i.e. we skip over CRIF records with regulations specified as e.g. "..., CFTC, SEC, ..."
+                        if (netRecordsSEC.find(cr) == netRecordsSEC.end()) {
+                            if (!quiet_) {
+                                DLOG("SimmCalculator: Inserting CRIF record with CFTC "
+                                     << s.first << " regulation into SEC CRIF records: " << cr);
+                            }
+                            s.second.at("SEC")->add(cr);
+                        }
+                    }
+                }
+
             }
             // The CrifLoader was set initially without aggregation, so make sure to aggregate this now
-            if (hasCFTC)
+            if (hasCFTCLocal)
                 s.second.at("CFTC")->aggregate();
-            if (hasSEC)
+            if (hasSECLocal)
                 s.second.at("SEC")->aggregate();
 
             // If netting set has "Unspecified" plus other regulations, the "Unspecified" sensis are to be excluded.
@@ -171,9 +202,6 @@ SimmCalculator::SimmCalculator(const SimmNetSensitivities& simmNetSensitivities,
             }
         }
     }
-
-    // Convert to result currency
-    convert();
 
     // Determine winning call and post regulations
     if (determineWinningRegulations) {
@@ -495,14 +523,17 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
         // Note: XccyBasis is not included in the calculation of concentration risk and the XccyBasis sensitivity
         //       is not scaled by it
         for (auto it = pIrQualifier.first; it != pIrQualifier.second; ++it) {
-            concentrationRisk[qualifier] += it->amountUsd;
+            concentrationRisk[qualifier] += it->amountResultCcy;
         }
         // Add inflation sensitivity to the concentration risk
         if (itInflation != ssQualifierIndex.end()) {
-            concentrationRisk[qualifier] += itInflation->amountUsd;
+            concentrationRisk[qualifier] += itInflation->amountResultCcy;
         }
         // Divide by the concentration risk threshold
-        concentrationRisk[qualifier] /= simmConfiguration_->concentrationThreshold(RiskType::IRCurve, qualifier);
+        Real concThreshold = simmConfiguration_->concentrationThreshold(RiskType::IRCurve, qualifier);
+        if (resultCcy_ != "USD")
+            concThreshold *= market_->fxRate("USD" + resultCcy_)->value();
+        concentrationRisk[qualifier] /= concThreshold;
         // Final concentration risk amount
         concentrationRisk[qualifier] = max(1.0, sqrt(std::abs(concentrationRisk[qualifier])));
 
@@ -511,7 +542,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
             // Risk weight i.e. $RW_k$ from SIMM docs
             Real rwOuter = simmConfiguration_->weight(RiskType::IRCurve, qualifier, itOuter->label1);
             // Weighted sensitivity i.e. $WS_{k,i}$ from SIMM docs
-            Real wsOuter = rwOuter * itOuter->amountUsd * concentrationRisk[qualifier];
+            Real wsOuter = rwOuter * itOuter->amountResultCcy * concentrationRisk[qualifier];
             // Update weighted sensitivity sum
             sumWeightedSensis[qualifier] += wsOuter;
             // Add diagonal element to delta margin
@@ -526,7 +557,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
                                                                  RiskType::IRCurve, qualifier, itInner->label1, "");
                 // Add cross element to delta margin
                 Real rwInner = simmConfiguration_->weight(RiskType::IRCurve, qualifier, itInner->label1);
-                Real wsInner = rwInner * itInner->amountUsd * concentrationRisk[qualifier];
+                Real wsInner = rwInner * itInner->amountResultCcy * concentrationRisk[qualifier];
                 deltaMargin[qualifier] += 2 * subCurveCorr * tenorCorr * wsOuter * wsInner;
             }
         }
@@ -537,7 +568,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
             // Risk weight
             Real rwInflation = simmConfiguration_->weight(RiskType::Inflation, qualifier, itInflation->label1);
             // Weighted sensitivity
-            wsInflation = rwInflation * itInflation->amountUsd * concentrationRisk[qualifier];
+            wsInflation = rwInflation * itInflation->amountResultCcy * concentrationRisk[qualifier];
             // Update weighted sensitivity sum
             sumWeightedSensis[qualifier] += wsInflation;
             // Add diagonal element to delta margin
@@ -549,7 +580,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
             for (auto it = pIrQualifier.first; it != pIrQualifier.second; ++it) {
                 // Add cross element to delta margin
                 Real rw = simmConfiguration_->weight(RiskType::IRCurve, qualifier, it->label1);
-                Real ws = rw * it->amountUsd * concentrationRisk[qualifier];
+                Real ws = rw * it->amountResultCcy * concentrationRisk[qualifier];
                 deltaMargin[qualifier] += 2 * corr * ws * wsInflation;
             }
         }
@@ -559,7 +590,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
             // Risk weight
             Real rwXccy = simmConfiguration_->weight(RiskType::XCcyBasis, qualifier, itXccy->label1);
             // Weighted sensitivity (no concentration risk here)
-            Real wsXccy = rwXccy * itXccy->amountUsd;
+            Real wsXccy = rwXccy * itXccy->amountResultCcy;
             // Update weighted sensitivity sum
             sumWeightedSensis[qualifier] += wsXccy;
             // Add diagonal element to delta margin
@@ -571,7 +602,7 @@ pair<map<string, Real>, bool> SimmCalculator::irDeltaMargin(const NettingSetDeta
             for (auto it = pIrQualifier.first; it != pIrQualifier.second; ++it) {
                 // Add cross element to delta margin
                 Real rw = simmConfiguration_->weight(RiskType::IRCurve, qualifier, it->label1, calculationCcy_);
-                Real ws = rw * it->amountUsd * concentrationRisk[qualifier];
+                Real ws = rw * it->amountResultCcy * concentrationRisk[qualifier];
                 deltaMargin[qualifier] += 2 * corr * ws * wsXccy;
             }
 
@@ -669,13 +700,17 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
 
         // One pass to get the concentration risk for this qualifier
         for (auto it = pIrQualifier.first; it != pIrQualifier.second; ++it) {
-            concentrationRisk[qualifier] += it->amountUsd;
+            concentrationRisk[qualifier] += it->amountResultCcy;
         }
         for (auto it = pInfQualifier.first; it != pInfQualifier.second; ++it) {
-            concentrationRisk[qualifier] += it->amountUsd;
+            concentrationRisk[qualifier] += it->amountResultCcy;
         }
         // Divide by the concentration risk threshold
-        concentrationRisk[qualifier] /= simmConfiguration_->concentrationThreshold(RiskType::IRVol, qualifier);
+        Real concThreshold = simmConfiguration_->concentrationThreshold(RiskType::IRVol, qualifier);
+        if (resultCcy_ != "USD")
+            concThreshold *= market_->fxRate("USD" + resultCcy_)->value();
+        concentrationRisk[qualifier] /= concThreshold;
+        
         // Final concentration risk amount
         concentrationRisk[qualifier] = max(1.0, sqrt(std::abs(concentrationRisk[qualifier])));
 
@@ -685,7 +720,7 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
             // Risk weight i.e. $RW_k$ from SIMM docs
             Real rwOuter = simmConfiguration_->weight(RiskType::IRVol, qualifier, itOuter->label1);
             // Weighted sensitivity i.e. $WS_{k,i}$ from SIMM docs
-            Real wsOuter = rwOuter * itOuter->amountUsd * concentrationRisk[qualifier];
+            Real wsOuter = rwOuter * itOuter->amountResultCcy * concentrationRisk[qualifier];
             // Update weighted sensitivity sum
             sumWeightedSensis[qualifier] += wsOuter;
             // Add diagonal element to vega margin
@@ -697,7 +732,7 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
                                                             RiskType::IRVol, qualifier, itInner->label1, "");
                 // Add cross element to vega margin
                 Real rwInner = simmConfiguration_->weight(RiskType::IRVol, qualifier, itInner->label1);
-                Real wsInner = rwInner * itInner->amountUsd * concentrationRisk[qualifier];
+                Real wsInner = rwInner * itInner->amountResultCcy * concentrationRisk[qualifier];
                 vegaMargin[qualifier] += 2 * corr * wsOuter * wsInner;
             }
         }
@@ -709,7 +744,7 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
             // Risk weight i.e. $RW_k$ from SIMM docs
             Real rwOuter = simmConfiguration_->weight(RiskType::InflationVol, qualifier, itOuter->label1);
             // Weighted sensitivity i.e. $WS_{k,i}$ from SIMM docs
-            Real wsOuter = rwOuter * itOuter->amountUsd * concentrationRisk[qualifier];
+            Real wsOuter = rwOuter * itOuter->amountResultCcy * concentrationRisk[qualifier];
             // Update weighted sensitivity sum
             sumWeightedSensis[qualifier] += wsOuter;
             // Add diagonal element to vega margin
@@ -722,7 +757,7 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
                                                             RiskType::IRVol, qualifier, itInner->label1, "");
                 // Add cross element to vega margin
                 Real rwInner = simmConfiguration_->weight(RiskType::IRVol, qualifier, itInner->label1);
-                Real wsInner = rwInner * itInner->amountUsd * concentrationRisk[qualifier];
+                Real wsInner = rwInner * itInner->amountResultCcy * concentrationRisk[qualifier];
                 vegaMargin[qualifier] += 2 * corr * wsOuter * wsInner;
             }
             // Secondly, against all previous InflationVol components
@@ -732,7 +767,7 @@ pair<map<string, Real>, bool> SimmCalculator::irVegaMargin(const NettingSetDetai
                                                             RiskType::InflationVol, qualifier, itInner->label1, "");
                 // Add cross element to vega margin
                 Real rwInner = simmConfiguration_->weight(RiskType::InflationVol, qualifier, itInner->label1);
-                Real wsInner = rwInner * itInner->amountUsd * concentrationRisk[qualifier];
+                Real wsInner = rwInner * itInner->amountResultCcy * concentrationRisk[qualifier];
                 vegaMargin[qualifier] += 2 * corr * wsOuter * wsInner;
             }
         }
@@ -832,7 +867,7 @@ pair<map<string, Real>, bool> SimmCalculator::irCurvatureMargin(const NettingSet
             // Curvature weight i.e. $SF(t_{kj})$ from SIMM docs
             Real sfOuter = simmConfiguration_->curvatureWeight(RiskType::IRVol, itOuter->label1);
             // Curvature sensitivity i.e. $CVR_{ik}$ from SIMM docs
-            Real wsOuter = sfOuter * (itOuter->amountUsd * multiplier);
+            Real wsOuter = sfOuter * (itOuter->amountResultCcy * multiplier);
             // Update weighted sensitivity sums
             sumWeightedSensis[qualifier] += wsOuter;
             sumWs += wsOuter;
@@ -846,7 +881,7 @@ pair<map<string, Real>, bool> SimmCalculator::irCurvatureMargin(const NettingSet
                                                             RiskType::IRVol, qualifier, itInner->label1, "");
                 // Add cross element to curvature margin
                 Real sfInner = simmConfiguration_->curvatureWeight(RiskType::IRVol, itInner->label1);
-                Real wsInner = sfInner * (itInner->amountUsd * multiplier);
+                Real wsInner = sfInner * (itInner->amountResultCcy * multiplier);
                 curvatureMargin[qualifier] += 2 * corr * corr * wsOuter * wsInner;
             }
         }
@@ -860,7 +895,7 @@ pair<map<string, Real>, bool> SimmCalculator::irCurvatureMargin(const NettingSet
             for (auto infIt = pInfQualifier.first; infIt != pInfQualifier.second; ++infIt) {
                 // Curvature weight i.e. $SF(t_{kj})$ from SIMM docs
                 Real infSf = simmConfiguration_->curvatureWeight(RiskType::InflationVol, infIt->label1);
-                infWs += infSf * (infIt->amountUsd * multiplier);
+                infWs += infSf * (infIt->amountResultCcy * multiplier);
             }
             // Update weighted sensitivity sums
             sumWeightedSensis[qualifier] += infWs;
@@ -878,7 +913,7 @@ pair<map<string, Real>, bool> SimmCalculator::irCurvatureMargin(const NettingSet
                                                             qualifier, irIt->label1, "");
                 // Add cross element to curvature margin
                 Real irSf = simmConfiguration_->curvatureWeight(RiskType::IRVol, irIt->label1);
-                Real irWs = irSf * (irIt->amountUsd * multiplier);
+                Real irWs = irSf * (irIt->amountResultCcy * multiplier);
                 curvatureMargin[qualifier] += 2 * corr * corr * infWs * irWs;
             }
         }
@@ -992,10 +1027,13 @@ pair<map<string, Real>, bool> SimmCalculator::margin(const NettingSetDetails& ne
             for (auto it = pQualifier.first; it != pQualifier.second; ++it) {
                 // Get the sigma value if applicable - returns 1.0 if not applicable
                 Real sigma = simmConfiguration_->sigma(rt, it->qualifier, it->label1, calculationCcy_);
-                concentrationRisk[qualifier] += it->amountUsd * sigma * hvr;
+                concentrationRisk[qualifier] += it->amountResultCcy * sigma * hvr;
             }
             // Divide by the concentration risk threshold
-            concentrationRisk[qualifier] /= simmConfiguration_->concentrationThreshold(rt, qualifier);
+            Real concThreshold = simmConfiguration_->concentrationThreshold(rt, qualifier);
+            if (resultCcy_ != "USD")
+                concThreshold *= market_->fxRate("USD" + resultCcy_)->value();
+            concentrationRisk[qualifier] /= concThreshold;
             // Final concentration risk amount
             concentrationRisk[qualifier] = max(1.0, sqrt(std::abs(concentrationRisk[qualifier])));
         }
@@ -1018,7 +1056,8 @@ pair<map<string, Real>, bool> SimmCalculator::margin(const NettingSetDetails& ne
             // Get the sigma value if applicable - returns 1.0 if not applicable
             Real sigmaOuter = simmConfiguration_->sigma(rt, itOuter->qualifier, itOuter->label1, calculationCcy_);
             // Weighted sensitivity i.e. $WS_{k}$ from SIMM docs
-            Real wsOuter = rwOuter * (itOuter->amountUsd * sigmaOuter * hvr) * concentrationRisk[itOuter->qualifier];
+            Real wsOuter =
+                rwOuter * (itOuter->amountResultCcy * sigmaOuter * hvr) * concentrationRisk[itOuter->qualifier];
             // Update weighted sensitivity sum
             sumWeightedSensis[bucket] += wsOuter;
             // Add diagonal element to bucket margin
@@ -1045,7 +1084,7 @@ pair<map<string, Real>, bool> SimmCalculator::margin(const NettingSetDetails& ne
                 Real sigmaInner = simmConfiguration_->sigma(rt, itInner->qualifier, itInner->label1, calculationCcy_);
                 Real rwInner = simmConfiguration_->weight(rt, itInner->qualifier, itInner->label1, calculationCcy_);
                 Real wsInner =
-                    rwInner * (itInner->amountUsd * sigmaInner * hvr) * concentrationRisk[itInner->qualifier];
+                    rwInner * (itInner->amountResultCcy * sigmaInner * hvr) * concentrationRisk[itInner->qualifier];
                 bucketMargin[bucket] += 2 * corr * f * wsOuter * wsInner;
             }
             // For FX risk class, results are broken down by qualifier, i.e. currency, instead of bucket, which is not used for Risk_FX
@@ -1164,8 +1203,8 @@ SimmCalculator::curvatureMargin(const NettingSetDetails& nettingSetDetails, cons
             Real sigmaOuter = simmConfiguration_->sigma(rt, itOuter->qualifier, itOuter->label1, calculationCcy_);
             // Weighted curvature i.e. $CVR_{ik}$ from SIMM docs
             // WARNING: The order of multiplication here is important because unit tests fail if for
-            //          example you use sfOuter * (itOuter->amountUsd * multiplier) * sigmaOuter;
-            Real wsOuter = sfOuter * ((itOuter->amountUsd * multiplier) * sigmaOuter);
+            //          example you use sfOuter * (itOuter->amountResultCcy * multiplier) * sigmaOuter;
+            Real wsOuter = sfOuter * ((itOuter->amountResultCcy * multiplier) * sigmaOuter);
             // for ISDA SIMM 2.2 or higher, this $CVR_{ik}$ for EQ bucket 12 is zero
             SimmVersion version = parseSimmVersion(simmConfiguration_->version());
             SimmVersion thresholdVersion = SimmVersion::V2_2;
@@ -1186,7 +1225,7 @@ SimmCalculator::curvatureMargin(const NettingSetDetails& nettingSetDetails, cons
                 // Add cross element to delta margin
                 Real sfInner = simmConfiguration_->curvatureWeight(rt, itInner->label1);
                 Real sigmaInner = simmConfiguration_->sigma(rt, itInner->qualifier, itInner->label1, calculationCcy_);
-                Real wsInner = sfInner * ((itInner->amountUsd * multiplier) * sigmaInner);
+                Real wsInner = sfInner * ((itInner->amountResultCcy * multiplier) * sigmaInner);
                 curvatureMargin[bucket] += 2 * corr * corr * wsOuter * wsInner;
             }
             // For FX risk class, results are broken down by qualifier, i.e. currency, instead of bucket, which is not
@@ -1325,7 +1364,7 @@ void SimmCalculator::calcAddMargin(const SimmSide& side, const NettingSetDetails
     key = make_tuple(nettingSetDetails, pc, rt);
     pIt = ssRiskTypeIndex.equal_range(key);
     while (pIt.first != pIt.second) {
-        Real fixedMargin = pIt.first->amountUsd;
+        Real fixedMargin = pIt.first->amountResultCcy;
         add(nettingSetDetails, regulation, ProductClass::AddOnFixedAmount, RiskClass::All, MarginType::AdditionalIM,
             "All", fixedMargin, side, overwrite);
 
@@ -1363,7 +1402,7 @@ void SimmCalculator::calcAddMargin(const SimmSide& side, const NettingSetDetails
 
         // If we have found a corresponding notional, update the additional margin
         if (count == 1) {
-            Real notional = pQualifierIt.first->amountUsd;
+            Real notional = pQualifierIt.first->amountResultCcy;
             Real factor = pIt.first->amount;
             Real notionalFactorMargin = notional * factor / 100.0;
 
@@ -1644,7 +1683,7 @@ void SimmCalculator::add(const NettingSetDetails& nettingSetDetails, const strin
                            << ", " << pc << ", " << rc << ", " << mt << "] of " << margin);
     }
 
-    simmResults_[side][nettingSetDetails][regulation].add(pc, rc, mt, b, margin, "USD", calculationCcy_, overwrite);
+    simmResults_[side][nettingSetDetails][regulation].add(pc, rc, mt, b, margin, resultCcy_, calculationCcy_, overwrite);
 }
 
 void SimmCalculator::add(const NettingSetDetails& nettingSetDetails, const string& regulation, const ProductClass& pc,
@@ -1693,7 +1732,7 @@ void SimmCalculator::addCrifRecord(const CrifRecord& crifRecord, const bool enfo
                         simmConfiguration_, CrifRecord::additionalHeaders, true, aggregateTrades);
                 }
 
-                // We make sure to ignore amountCcy when aggregating the records, since we will only be using amountUsd,
+                // We make sure to ignore amountCcy when aggregating the records, since we will only be using amountResultCcy,
                 // and we may have CRIF records that are equal everywhere except for the amountCcy, and this will fail
                 // in the case of Risk_XCcyBasis and Risk_Inflation.
                 const bool onDiffAmountCcy = true;
@@ -1709,28 +1748,6 @@ Real SimmCalculator::lambda(Real theta) const {
     static Real q = boost::math::quantile(boost::math::normal(), 0.995);
 
     return (q * q - 1.0) * (1.0 + theta) - theta;
-}
-
-void SimmCalculator::convert() {
-    // If calculation currency is USD, nothing to do.
-    if (resultCcy_ == "USD")
-        return;
-
-    QL_REQUIRE(market_, "market not set");
-    QuantLib::Handle<QuantLib::Quote> fxQuote = market_->fxRate("USD" + resultCcy_);
-    QL_REQUIRE(!fxQuote.empty(), "market FX/USD/" << resultCcy_ << " rate not found");
-    const Real fxSpot = fxQuote->value();
-
-    QL_REQUIRE(fxSpot > 0, "SIMM Calculator: The USD spot rate must be positive");
-
-    // Loop over all results and divide by the spot rate (i.e. convert from USD to SIMM calculation currency)
-    for (auto& side : simmResults_) {
-        for (auto& okv : side.second) {
-            for (auto& reg : okv.second) {
-                reg.second.convert(fxSpot, resultCcy_);
-            }
-        }
-    }
 }
 
 } // namespace analytics

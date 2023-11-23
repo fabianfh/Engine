@@ -20,9 +20,9 @@ commodityforward.cpp
 commodityschwartzmodel.cpp
 commodityspreadoption.cpp
 computeenvironment.cpp
-computeenvironment_tarf_sensi_ops.cpp
 correlationtermstructure.cpp
 cpicapfloor.cpp
+cpileg.cpp
 crcirpp.cpp
 crossassetmodel.cpp
 crossassetmodel2.cpp
